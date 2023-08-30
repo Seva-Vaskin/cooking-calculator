@@ -1,0 +1,6 @@
+[postgres]
+database = cook-db,
+user = cook-db,
+host = localhost,
+password = password,
+port = 5432
