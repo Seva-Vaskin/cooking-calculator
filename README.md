@@ -61,4 +61,8 @@ used to perform installation
 
 ## Configuring
 
-* Create a copy of `auth.ini.example` named `auth.example` and configure postgres connection information 
+* Create a copy of `auth.ini.example` named `auth.example` and configure postgres connection information
+
+## Database creating
+
+* Database could be created using `create_db.sql` script. It could be filled with data not provided in the repository.

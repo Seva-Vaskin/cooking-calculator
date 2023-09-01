@@ -4,3 +4,6 @@ user = cook-db,
 host = localhost,
 password = password,
 port = 5432
+
+[flask]
+SECRET_KEY = your_flask_secret_key

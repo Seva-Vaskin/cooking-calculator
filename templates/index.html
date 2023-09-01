@@ -1,11 +1,45 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 
-    <form action="" method="post">
-        {{ form.name }}
-{#        {{ form.recaptcha }}#}
+    <h2>Итог</h2>
+    <table id="summary-table">
+        <tr>
+            <td>Белки:</td>
+            <td id="total-protein"></td>
+        </tr>
+        <tr>
+            <td>Жиры:</td>
+            <td id="total-fats"></td>
+        </tr>
+        <tr>
+            <td>Углеводы:</td>
+            <td id="total-carbohydrates"></td>
+        </tr>
+        <tr>
+            <td>Сумма числа от КД:</td>
+            <td id="total-amount"></td>
+        </tr>
+    </table>
+
+    <h2>Текущий список</h2>
+    <table id="saved-items-table">
+        <tr>
+            <th>Наименование</th>
+            <th>Белки</th>
+            <th>Жиры</th>
+            <th>Углеводы</th>
+            <th>Непонятное поле от КД</th>
+            <th></th>
+        </tr>
+    </table>
+
+    <h2>Поиск</h2>
+    <form id="search-form">
+        {{ form.foodstuff }}
     </form>
 
+    <ul id="found-items-list" tabindex="0"></ul>
+
+    <script src="{{ url_for('static', filename='javascript/javascript.js') }}"></script>
 {% endblock %}
