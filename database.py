@@ -35,7 +35,6 @@ class Database:
             f"WHERE UPPER(name) LIKE UPPER('%{substr}%') "
             f"LIMIT {limit};")
         rows = cursor.fetchall()
-        cursor.close()
         return list(map(lambda x: x[0], rows))
 
     def get_by_name(self, name: str) -> tuple:
@@ -44,8 +43,4 @@ class Database:
             f"SELECT * FROM foodstuff WHERE name = '{name}' LIMIT 1;"
         )
         row = cursor.fetchone()
-        cursor.close()
         return row
-
-    def __del__(self):
-        self._connection.close()

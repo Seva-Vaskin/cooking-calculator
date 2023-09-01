@@ -3,26 +3,26 @@
 ([This tutorial](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-22-04)
 was used to perform installation)
 
-* ``git clone https://github.com/Seva-Vaskin/cooking-calulator.git``
+* ``git clone https://github.com/Seva-Vaskin/cooking-calculator.git``
 * ``cd cooking-calculator``
 * ``sudo apt install python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools python3-venv``
 * ``python3 -m venv cookingenv``
-* ``source cookingvenv/bin/activate``
+* ``source cookingenv/bin/activate``
 * ``pip install -r requirements.txt``
-* ``sudo vi /etc/systemd/cooking.service``
+* ``sudo vi /etc/systemd/system/cooking.service``
 * In opened file create service based on template code provided below:
 
 ```
 [Unit]
-Description=uWSGI instance to serve cooking calulator
+Description=uWSGI instance to serve cooking calculator
 After=network.target
 
 [Service]
 User=cook
 Group=www-data
-WorkingDirectory=/home/cook/cooking-calulator
-Environment="PATH=/home/cook/cooking-calulator/cookingvenv/bin"
-ExecStart=/home/cook/cooking-calulator/cookingvenv/bin/uwsgi --ini cooking.ini
+WorkingDirectory=/home/cook/cooking-calculator
+Environment="PATH=/home/cook/cooking-calculator/cookingenv/bin"
+ExecStart=/home/cook/cooking-calculator/cookingenv/bin/uwsgi --ini cooking.ini
 
 [Install]
 WantedBy=multi-user.target
@@ -41,7 +41,7 @@ server {
 
     location / {
         include uwsgi_params;
-        uwsgi_pass unix:/home/cook/cooking-calulator/cooking.sock;
+        uwsgi_pass unix:/home/cook/cooking-calculator/cooking.sock;
     }
 }
 ```
