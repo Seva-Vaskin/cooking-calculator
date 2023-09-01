@@ -24,11 +24,21 @@ class Database:
         return kwargs
 
     def __init__(self):
-        kwargs = self.__get_connection_kwargs()
-        self._connection = psycopg2.connect(**kwargs)
+        self._connection = self.__connect()
+
+    @classmethod
+    def __connect(cls):
+        kwargs = cls.__get_connection_kwargs()
+        return psycopg2.connect(**kwargs)
+
+    def get_connection(self):
+        if self._connection.closed:
+            self._connection = self.__connect()
+        return self._connection
 
     def search_by_substring(self, substr: str, limit: int) -> List[str]:
-        cursor = self._connection.cursor()
+        conn = self.get_connection()
+        cursor = conn.cursor()
         cursor.execute(
             "SELECT name "
             "FROM foodstuff "
@@ -38,7 +48,8 @@ class Database:
         return list(map(lambda x: x[0], rows))
 
     def get_by_name(self, name: str) -> tuple:
-        cursor = self._connection.cursor()
+        conn = self.get_connection()
+        cursor = conn.cursor()
         cursor.execute(
             f"SELECT * FROM foodstuff WHERE name = '{name}' LIMIT 1;"
         )
