@@ -100,16 +100,12 @@ function updateSummary() {
         let fats = parseFloat(row.cells[3].textContent) * mass / 100;
         let carbohydrates = parseFloat(row.cells[4].textContent) * mass / 100;
 
-
-        let calories = NaN;
-        if (thermalProcessing)
-            // ККАЛпто=Б*4*0.94+Ж*9*0.88+У*4*0.91
-            calories = proteins * 4 * 0.94 + fats * 9 * 0.99 + carbohydrates * 4 * 0.91
-        else
-            // ККАЛнпто=Б*4+Ж*9+У*4
-            calories = proteins * 4 + fats * 9 + carbohydrates * 4
-
-        console.assert(!isNaN(calories));
+        if (thermalProcessing) {
+            proteins *= 0.94;
+            fats *= 0.88;
+            carbohydrates *= 0.91;
+        }
+        let calories = proteins * 4 + fats * 9 + carbohydrates * 4;
 
         totalMass += mass;
         totalProteins += proteins;
