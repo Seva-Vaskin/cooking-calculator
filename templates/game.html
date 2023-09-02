@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+
+        <h1>Игра: угадай число</h1>
+        <p>Я загадал число от 1 до 100. Отгадаешь его?</p>
+        <label for="guess-input">Твой ответ:</label>
+        <input id="guess-input" type="number" min="1" max="100">
+        <button id="submit-button">Проверить число</button>
+        <p id="feedback"></p>
+        <script>
+            // Generate a random number between 1 and 100
+            let randomNumber = Math.floor(Math.random() * 100) + 1;
+
+            // Get references to the input field, submit button, and feedback paragraph
+            let guessInput = document.querySelector('#guess-input');
+            let submitButton = document.querySelector('#submit-button');
+            let feedback = document.querySelector('#feedback');
+
+            // Add an event listener to the submit button
+            submitButton.addEventListener('click', () => {
+                // Get the player's guess from the input field
+                let guess = parseInt(guessInput.value);
+
+                // Check if the guess is correct
+                if (guess === randomNumber) {
+                    feedback.textContent = 'Ура! Ты угдал(а). Обнови страницу, чтобы начать игру заново';
+                } else if (guess > randomNumber) {
+                    feedback.textContent = 'Моё число меньше. Попробуй ещё раз.';
+                } else {
+                    feedback.textContent = 'Моё число больше. Попробуй ещё раз.';
+                }
+            });
+        </script>
+
+    </div>
+{% endblock %}
