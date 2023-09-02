@@ -2,6 +2,11 @@ body {
     font-family: Arial, sans-serif;
 }
 
+div#global_div {
+    margin-left: 1.5em;
+    margin-top: 1.5em;
+}
+
 form {
     margin-bottom: 20px;
 }

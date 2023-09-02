@@ -1,54 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div id="global_div">
 
-    <h2>Итог</h2>
-    <table id="summary-table">
-        <tr>
-            <td>Белки:</td>
-            <td id="total-proteins"></td>
-        </tr>
-        <tr>
-            <td>Жиры:</td>
-            <td id="total-fats"></td>
-        </tr>
-        <tr>
-            <td>Углеводы:</td>
-            <td id="total-carbohydrates"></td>
-        </tr>
-        <tr>
-            <td>Масса:</td>
-            <td id="total-mass"></td>
-        </tr>
-        <tr>
-            <td>ККал:</td>
-            <td id="total-calories"></td>
-        </tr>
-        <tr>
-            <td>Ккал (на 100гр):</td>
-            <td id="total-calories-normalized"></td>
-        </tr>
-    </table>
+        <h2>Итог</h2>
+        <table id="summary-table">
+            <tr>
+                <th></th>
+                <th>Белки:</th>
+                <th>Жиры:</th>
+                <th>Углеводы:</th>
+                <th>Масса:</th>
+                <th>ККал:</th>
+                <th>Ккал (на 100гр):</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td id="total-proteins">0</td>
+                <td id="total-fats">0</td>
+                <td id="total-carbohydrates">0</td>
+                <td id="total-mass">0</td>
+                <td id="total-calories">0</td>
+                <td id="total-calories-normalized">0</td>
+            </tr>
+        </table>
 
-    <h2>Текущий список</h2>
-    <table id="saved-items-table">
-        <tr>
-            <th>Тепловая <br> обработка</th>
-            <th>Наименование</th>
-            <th>Белки <br> (на 100гр)</th>
-            <th>Жиры <br> (на 100гр)</th>
-            <th>Углеводы <br> (на 100гр)</th>
-            <th>Масса (гр)</th>
-            <th></th>
-        </tr>
-    </table>
 
-    <h2>Поиск</h2>
-    <form id="search-form">
-        {{ form.foodstuff }}
-    </form>
+        <h2>Текущий список</h2>
+        <table id="saved-items-table">
+            <tr>
+                <th>Тепловая <br> обработка</th>
+                <th>Наименование</th>
+                <th>Белки <br> (на 100гр)</th>
+                <th>Жиры <br> (на 100гр)</th>
+                <th>Углеводы <br> (на 100гр)</th>
+                <th>Масса (гр)</th>
+                <th></th>
+            </tr>
+        </table>
 
-    <ul id="found-items-list" tabindex="0"></ul>
+        <h2>Поиск</h2>
+        <form id="search-form">
+            {{ form.foodstuff }}
+        </form>
 
-    <script src="{{ url_for('static', filename='javascript/javascript.js') }}"></script>
+        <ul id="found-items-list" tabindex="0"></ul>
+
+        <script src="{{ url_for('static', filename='javascript/javascript.js') }}"></script>
+
+    </div>
 {% endblock %}
