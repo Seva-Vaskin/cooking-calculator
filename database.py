@@ -1,10 +1,22 @@
-from configparser import ConfigParser
-from typing import List, Generator
+from __future__ import annotations
 
+from configparser import ConfigParser
+from typing import List, Tuple, Self
+from dataclasses import dataclass
 import psycopg2
 
 
 class Database:
+    @dataclass
+    class Row:
+        name: str
+        proteins: float
+        fats: float
+        carbohydrates: float
+
+        @classmethod
+        def from_tuple(cls, tpl: Tuple[str, float, float, float]) -> Self:
+            return Database.Row(*tpl)
 
     @staticmethod
     def __get_connection_kwargs():
@@ -47,11 +59,11 @@ class Database:
         rows = cursor.fetchall()
         return list(map(lambda x: x[0], rows))
 
-    def get_by_name(self, name: str) -> tuple:
+    def get_by_name(self, name: str) -> Self.Row:
         conn = self.get_connection()
         cursor = conn.cursor()
         cursor.execute(
             f"SELECT * FROM foodstuff WHERE name = '{name}' LIMIT 1;"
         )
         row = cursor.fetchone()
-        return row
+        return Database.Row.from_tuple(row)

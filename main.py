@@ -6,8 +6,6 @@ from forms import SearchForm
 app = FlaskAppCreator.create()
 foodstuffDB = Database()
 
-saved_items = []
-
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
@@ -18,7 +16,7 @@ def index():
         found_items = foodstuffDB.search_by_substring(search_str, 10)
 
     form = SearchForm()
-    return render_template('index.html', form=form, found_items=found_items, saved_items=saved_items)
+    return render_template('index.html', form=form, found_items=found_items)
 
 
 @app.route("/search", methods=['POST'])
@@ -28,11 +26,14 @@ def search():
     return jsonify({'found_items': found_items})
 
 
-@app.route("/get_info", methods=['POST'])
+@app.route("/get_foodstuff_info", methods=['POST'])
 def get_foodstuff_info():
     foodstuff = request.json.get('foodstuff')
-    found_tuple = foodstuffDB.get_by_name(foodstuff)
-    return jsonify({'foodstuff_info': found_tuple})
+    row = foodstuffDB.get_by_name(foodstuff)
+    return jsonify({'name': row.name,
+                    'proteins': row.proteins,
+                    'fats': row.fats,
+                    'carbohydrates': row.carbohydrates})
 
 
 if __name__ == '__main__':
