@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from configparser import ConfigParser
-from typing import List, Tuple, Self
+from typing import List, Tuple
 from dataclasses import dataclass
 import psycopg2
 
@@ -15,7 +15,7 @@ class Database:
         carbohydrates: float
 
         @classmethod
-        def from_tuple(cls, tpl: Tuple[str, float, float, float]) -> Self:
+        def from_tuple(cls, tpl: Tuple[str, float, float, float]) -> Database.Row:
             return Database.Row(*tpl)
 
     @staticmethod
